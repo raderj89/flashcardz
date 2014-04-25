@@ -114,3 +114,14 @@ button {
   background-color: blue;
   color: white;
 }
+
+input#registerbutton {
+  margin-top: 10px;
+  margin-left: 300px;
+}
+
+input#loginbutton {
+  margin-top: 10px;
+  margin-left: 300px;
+}
+
