@@ -1,5 +1,9 @@
 body {
-  padding-top: 40px;
+  padding-top: 100px;
+}
+
+.jumbotron {
+  text-align: center;
 }
 
 .input-group {
