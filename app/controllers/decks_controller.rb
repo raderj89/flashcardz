@@ -34,8 +34,6 @@ post '/decks/:id' do
 
   else
     @round.increase_wrong
-
-
-
+  end
   erb :"decks/show"
 end

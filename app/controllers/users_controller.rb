@@ -6,7 +6,7 @@ post "/register" do
   @user = User.new(email: params[:email], password: params[:password])
   if @user.save
     session[:user_id] = @user.id
-    redirect '/'
+    redirect '/decks'
   else
     redirect '/register'
     # add errors eventually
