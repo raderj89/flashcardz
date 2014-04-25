@@ -1,5 +1,5 @@
 get "/register" do
-  erb :register
+  erb :"users/register"
 end
 
 post "/register" do

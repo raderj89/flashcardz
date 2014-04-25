@@ -1,0 +1,26 @@
+<div class="scoreboard">
+  <div id="correct">
+    <h4>Correct</h4>
+    <!-- erb for number correct -->
+  </div>
+  <div id="wrong">
+    <h4>Wrong</h4>
+    <!-- erb for number wrong -->
+  </div>
+  <div id="remaining">
+    <h4>Remaining</h4>
+    <!-- erb for number remaining -->
+  </div>
+</div>
+<div class="game">
+  <div id="card">
+
+  </div>
+  <div class="interface">
+    <form method="post" action="/decks/1">
+      <input type="text" name="guess">
+      <input type="submit" value="submit">
+    </form>
+  </div>
+  <!-- @cards.question[-1] -->
+</div>

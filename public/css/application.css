@@ -17,3 +17,41 @@ body {
 .btn {
   margin-top: 20px;
 }
+
+.game {
+  width: 600px;
+  height: 400px;
+  border: 2px blue solid;
+  margin: 0 auto;
+  margin-top: 100px;
+  margin-right: 120px;
+  float: right;
+}
+
+.scoreboard {
+  margin-top: 100px;
+  margin-left: 83px;
+  width: 120px;
+  height: 400px;
+  border: 2px green solid;
+  float: left;
+  text-align: center;
+}
+
+.scoreboard #correct {
+  width: auto;
+  height: 120px;
+  border: 1px solid black;
+}
+
+.scoreboard #wrong {
+  width: auto;
+  height: 120px;
+  border: 1px solid black;
+}
+
+.scoreboard #remaining {
+  width: auto;
+  height: 120px;
+  border: 1px solid black;
+}
