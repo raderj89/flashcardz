@@ -1,19 +1,41 @@
+before "/decks/*" do
+  current_user
+end
+
 get '/decks' do
   @decks = Deck.order('created_at DESC')
   erb :"decks/index"
 end
 
-get '/decks/1' do
-  @deck = Deck.find(1)
-  @round = Round.new(deck_id: @deck.id)
-  @cards = @deck.cards
-  erb :"decks/show"
+get '/decks/:id' do
+  @deck = Deck.find(params[:id])
+  @round = @current_user.rounds.build(deck_id: @deck.id)
+
+  if @round.save
+    @card = @deck.choose_card
+    erb :"decks/show"
+  else
+    redirect back
+  end
 end
 
-post '/decks/1' do
-  puts "#{params[:guess]}"
-  @deck = Deck.find(1)
-  @cards = @deck.cards
-  @guess = params[:guess]
+post '/decks/:id' do
+  puts "#{params}"
+  @deck = Deck.find(params[:id])
+  @card = Card.find(params[:card_id])
+  @round = @current_user.rounds.find(params[:id])
+  @guess = @round.guesses.build
+
+  user_guess = params[:guess]
+
+  if user_guess == @card.answer
+    @guess.correct = true
+    @round.increase_correct
+
+  else
+    @round.increase_wrong
+
+
+
   erb :"decks/show"
 end
