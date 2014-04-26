@@ -1,4 +1,5 @@
 require 'json'
+require 'pry-rails'
 
 before "/decks/*" do
   current_user
@@ -34,6 +35,7 @@ post '/decks/:id' do
   puts "#{params}"
   @deck = Deck.find(params[:id])
   @card = Card.find(params[:card_id])
+
   round = @current_user.rounds.find(params[:id])
   guess = round.guesses.build(card_id: @card.id)
 
