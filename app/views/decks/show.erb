@@ -23,14 +23,13 @@
   <div id="card">
     <% if @message %>
       <h1><%= @message %></h1>
-    <% end %>
-    <% if @card %>
+    <% elsif @card %>
       <h1>
         <%= @card.question %>
       </h1>
     </div>
     <div class="interface">
-      <form method="post" action="/decks/<%= @deck.id %>" id="guess">
+      <form method="post" action="/decks/<%= @round.id %>" id="guess">
         <div class="input-group">
           <input type="hidden" name="card_id" value="<%= @card.id %>">
           <input id="cometomama" type="text" class="form-control" name="guess" placeholder="Guess" value="<%= @card.answer %>">
@@ -39,7 +38,7 @@
           </span>
         </div>
       </form>
-      <a id="next-button" class="btn btn-primary btn-lg" href="/decks/<%= @deck.id%>">Skip</a>
+      <a id="next-button" class="btn btn-primary btn-lg" href="/decks/<%= @deck.id %>">Skip</a>
     </div>
   <% end %>
 </div>

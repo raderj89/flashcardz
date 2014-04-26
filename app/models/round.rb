@@ -24,4 +24,10 @@ class Round < ActiveRecord::Base
       nil
     end
   end
+
+  def calculate_score
+    (self.num_correct / (self.deck.cards.length + self.num_wrong).to_f) * 100
+  end
+
+
 end
