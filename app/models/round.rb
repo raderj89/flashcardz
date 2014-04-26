@@ -13,6 +13,11 @@ class Round < ActiveRecord::Base
     self.save
   end
 
-
-
+  def game_over?
+    if self.deck.cards_with_correct_guesses.length == self.deck.cards.length
+      return true
+    else
+      nil
+    end
+  end
 end

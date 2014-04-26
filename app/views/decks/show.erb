@@ -48,4 +48,22 @@
 
 
 
+=======
+      </div>
+
+
+    </div>
+
+  </div>
+
+  <div class="interface">
+    <form method="post" action="/decks/<%= @deck.id %>">
+      <input type="hidden" name="card_id" value="<%= @card.id %>">
+      <input type="text" name="guess" value="<%= @card.answer %>">
+      <input type="submit" value="submit">
+    </form>
+  </div>
+  <% end %>
+  <!-- @cards.question[-1] -->
+>>>>>>> 46a62609af55b61fc43421b77c3c4f310e00a19a
 </div>
