@@ -23,8 +23,7 @@
   <div id="card">
     <% if @message %>
       <h1><%= @message %></h1>
-    <% end %>
-    <% if @card %>
+    <% elsif @card %>
       <h1>
         <%= @card.question %>
       </h1>

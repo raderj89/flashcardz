@@ -1,0 +1,13 @@
+<h1>USER PROFILE</h1>
+<%= @user.email %><br>
+
+<% @user.rounds.each do |round| %>
+  <ul>
+    <li>Deck played: <%= round.deck.name %></li>
+    <li>Number correct: <%= round.num_correct %></li>
+    <li>Number wrong: <%= round.num_wrong %></li>
+    <li>Number of guesses: <%= round.guesses.length %></li>
+    <li>Total score: <%= round.calculate_score %></li>
+  </ul>
+<% end %>
+

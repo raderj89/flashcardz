@@ -13,3 +13,14 @@ post "/register" do
     @errors = nil
   end
 end
+
+get "/profile" do
+  @user = current_user
+
+  if @user
+    @user.rounds.order('created_at DESC')
+    erb :"users/profile"
+  else
+    redirect back
+  end
+end
