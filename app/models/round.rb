@@ -8,6 +8,10 @@ class Round < ActiveRecord::Base
     self.save
   end
 
+  def cards_left
+    self.deck.cards.length - self.deck.cards_with_correct_guesses.length
+  end
+
   def increase_wrong
     self.num_wrong += 1
     self.save
