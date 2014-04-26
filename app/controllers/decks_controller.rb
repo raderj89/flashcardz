@@ -1,6 +1,12 @@
+require 'json'
+
 before "/decks/*" do
   current_user
 end
+
+# after "/decks/*" do
+#   session[:message].clear
+# end
 
 get '/decks' do
   @decks = Deck.order('created_at DESC')
@@ -17,6 +23,7 @@ get '/decks/:id' do
   end
 
   if @round
+    # @flash = session[:message]
     @card = @deck.choose_card
     erb :"decks/show"
   else
@@ -37,11 +44,17 @@ post '/decks/:id' do
   if user_guess == @card.answer
     guess.set_correct
     round.increase_correct
-    @deck.remove_card(@card.id)
-    @message = "You got it right!"
+    num_correct = round.num_correct
+    num_wrong = round.num_wrong
+    response = "You got it right!"
   else
     round.increase_wrong
-    @message = "Oops! The answer was:"
+    num_wrong = round.num_wrong
+    num_correct = round.num_correct
+    response = "Oops! The answer was: #{@card.answer}"
   end
-  redirect "decks/#{@deck.id}"
+  json_object = {num_correct: num_correct, num_wrong: num_wrong, response: response}.to_json
+  puts json_object
+  return json_object
+  # redirect "decks/#{@deck.id}"
 end
