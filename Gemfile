@@ -16,6 +16,7 @@ gem 'activerecord'
 gem 'rake'
 
 gem 'shotgun'
+gem 'bcrypt', '~> 3.1.0'
 
 
 group :test do
