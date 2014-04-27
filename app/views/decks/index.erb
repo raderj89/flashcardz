@@ -1,7 +1,16 @@
 <h1>Decks</h1>
-  <div class="list-group">
-    <% @decks.each do |deck| %>
-      <a class="list-group-item" href="/decks/<%= deck.id %>"><%= deck.name %></a>
-    <% end %>
-  </diV>
+  <% @decks.each do |deck| %>
+  <div class="media">
+    <a class="pull-left"href="decks/<%=deck.id %>"><img class="media-object" src="<%= deck.image_url %>" width="100px"></a>
+    <div class="media-body">
+      <h4 class="media-heading"><a href="/decks/<%= deck.id %>"><%= deck.name %></a></h4>
+      <% if deck.rounds %>
+        <li>Number correct: <%= deck.rounds[0].num_correct %></li>
+        <li>Number wrong: <%= deck.rounds[0].num_wrong %></li>
+        <li>Number of guesses: <%= deck.rounds[0].guesses.length %></li>
+        <li>Total score: <%= deck.rounds[0].calculate_score %></li>
+      <% end %>
+    </div>
+  </div>
+  <% end %>
 
