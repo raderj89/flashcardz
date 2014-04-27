@@ -1,15 +1,20 @@
 get "/login" do
-  erb :"sessions/login"
+  if logged_in?
+    flash[:warning] = "You are already logged in."
+    redirect "/profile"
+  else
+    erb :"sessions/login"
+  end
 end
 
 post "/login" do
-  user = User.authenticate(params[:email], params[:password])
-  if user
+  user = User.find_by_email(params[:session][:email].downcase)
+  if user && user.authenticate(params[:session][:password])
     session[:user_id] = user.id
     redirect "/decks"
-    #eventual redirect to cards page
   else
-    redirect '/login'
+    flash[:danger] = "Your email or password is incorrect. Please try again."
+    redirect back
   end
 end
 

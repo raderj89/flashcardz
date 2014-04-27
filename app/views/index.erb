@@ -1,11 +1,11 @@
 <div class="jumbotron">
+  <p class="lead">Welcome to</p>
   <h1>Flashcardz</h1>
-  <p class="lead">Welcome to Flashcardz</p>
-  <p>
-    <a class="btn btn-lg btn-success" href="/login" role="button">Log in</a>
-  </p>
-  <p>
-    <a class="btn btn-lg" href="/register" role="button">Sign up today</a>
-  </p>
+  <% if logged_in? %>
+    <a class="btn btn-lg btn-success" href="/decks">Play a Deck</a>
+  <% else %>
+    <a class="btn btn-lg btn-success" href="/login" role="button">Log In</a>
 
+    <a class="btn btn-lg btn-default" href="/register" role="button">Register</a>
+  <% end %>
 </div>

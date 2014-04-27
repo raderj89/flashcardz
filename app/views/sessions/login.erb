@@ -1,8 +1,26 @@
-<h1>Login</h1>
-  <form action="/login" method="post">
-    <div class="input-group">
-      <input type="text" name="email" class="form-control" placeholder="Email"><br>
-      <input type="password" name="password" class="form-control" placeholder="Password">
-      <input type="submit" class="btn btn-primary" id="loginbutton" value="Login!">
-    </div>
-  </form>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h1>Log In</h1>
+  </div>
+
+  <div class="panel-body">
+
+    <form class="form-signin" role="form" action="/login" method="post">
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" type="email" name="session[email]" class="form-control" placeholder="Email" required autofocus>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input id="password" type="password" name="session[password]" class="form-control" placeholder="Password" required>
+      </div>
+
+      <div class="form-group">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </div>
+
+    </form>
+  </div>
+</div>

@@ -1,9 +1,42 @@
-<h1>Register for Flashcards</h1>
-<form action="/register" method="post">
-    <div class="input-group">
-      <input type="text" name="email" class="form-control" placeholder="Email"><br>
-      <input type="password" name="password" class="form-control" placeholder="Password">
-      <br>
-      <input type="submit" class="btn btn-primary" id="registerbutton"value="Register!">
-    </div>
-</form>
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <h1>Register for Flashcards</h1>
+  </div>
+
+  <div class="panel-body">
+    <% if @user %>
+      <% if @user.errors %>
+        <div class="alert alert-warning">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <h4>Please fix the <%= @user.errors.count %> error(s):</h4>
+          <ul>
+            <% @user.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    <% end %>
+    <form action="/register" method="post">
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input id="email" type="email" name="user[email]" class="form-control" placeholder="Email" required autofocus>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input id="password" type="password" name="user[password]" class="form-control" placeholder="Password" required>
+        </div>
+
+        <div class="form-group">
+          <label for="password_confirmation">Password Confirmation</label>
+          <input id="password_confirmation" type="password" name="user[password_confirmation]" class="form-control" placeholder="Password" required>
+        </div>
+
+        <div class="form-group">
+          <button class="btn btn-lg btn-success btn-block" type="submit">Sign Up!</button>
+        </div>
+    </form>
+  </div>
+</div>
