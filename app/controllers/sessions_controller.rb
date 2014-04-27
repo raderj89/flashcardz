@@ -3,13 +3,12 @@ get "/login" do
 end
 
 post "/login" do
-  user = User.authenticate(params[:email], params[:password])
-  if user
+  user = User.find_by_email(email: params[:session][:email].downcase)
+  if user && user.authenticate(params[:session][:password])
     session[:user_id] = user.id
     redirect "/decks"
-    #eventual redirect to cards page
   else
-    redirect '/login'
+    erb :"sessions/login"
   end
 end
 

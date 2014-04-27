@@ -3,6 +3,8 @@ class Round < ActiveRecord::Base
   belongs_to :user
   belongs_to :deck
 
+  validates :name, presence: true
+
   def increase_correct
     self.num_correct += 1
     self.save
