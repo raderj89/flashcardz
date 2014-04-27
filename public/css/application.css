@@ -28,23 +28,24 @@ body {
   text-align: center;
 }
 
+.score {
+  height: 120px;
+}
+
 .scoreboard #correct {
   width: auto;
-  height: 120px;
   background-color: #5cb85c;
   color: white;
 }
 
 .scoreboard #wrong {
   width: auto;
-  height: 120px;
   background-color: #d9534f;
   color: white;
 }
 
 .scoreboard #remaining {
   width: auto;
-  height: 120px;
   background-color: #f0ad4e;
   color: white;
 }
@@ -74,16 +75,6 @@ input[type=text]{
   color: white;
 }
 
-/*button {
-  position: absolute;
-  border-radius: 5px;
-  margin-left: 500px;
-  margin-top: -62px;
-  background-color: blue;
-  color: white;
-  width: 100px;
-}*/
-
 .score p {
   margin-top: -3px;
   font-size: 3.2em;
@@ -104,3 +95,18 @@ input#loginbutton {
   margin-left: 300px;
 }
 
+@media (max-width: 990px) {
+  .scoreboard {
+    width: 100%;
+    float: none;
+    margin-top: -40px;
+  }
+  .score {
+    height: 80px;
+    font-size: 0.5em;
+  }
+  .jumbotron {
+    width: 100%;
+    margin-top: -100px;
+  }
+}
