@@ -1,5 +1,7 @@
 <h1>Decks</h1>
-  <% @decks.each do |deck| %>
-    <a href="/decks/<%= deck.id %>"><%= deck.name %></a>
-  <% end %>
+  <div class="list-group">
+    <% @decks.each do |deck| %>
+      <a class="list-group-item" href="/decks/<%= deck.id %>"><%= deck.name %></a>
+    <% end %>
+  </diV>
 

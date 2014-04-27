@@ -17,6 +17,7 @@ gem 'rake'
 
 gem 'shotgun'
 gem 'bcrypt', '~> 3.1.0'
+gem 'sinatra-flash'
 
 
 group :test do

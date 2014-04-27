@@ -1,18 +1,21 @@
-
-require 'pry-rails'
-
-before "/decks/*" do
-  current_user
-end
-
 get '/decks' do
-  @decks = Deck.order('created_at DESC')
-  erb :"decks/index"
+  if logged_in?
+    @decks = Deck.order('created_at DESC')
+    erb :"decks/index"
+  else
+    flash[:danger] = "You need to be signed in to view decks."
+    redirect "/"
+  end
 end
 
 get '/decks/:id' do
-  @deck = Deck.find(params[:id])
-  @round = @current_user.rounds.where(deck_id: @deck.id).first_or_create
+  if logged_in?
+    @deck = Deck.find(params[:id])
+    @round = @current_user.rounds.where(user_id: @current_user.id, deck_id: @deck.id).first_or_create
+  else
+    flash[:danger] = "You need to be signed in to play a round."
+    redirect "/"
+  end
 
   if @round.game_over?
     @message = "Deck finished!"
@@ -27,7 +30,6 @@ get '/decks/:id' do
 end
 
 post '/decks/:id' do
-  puts "#{params}"
   @deck = Deck.find(params[:id])
   @card = Card.find(params[:card_id])
 
