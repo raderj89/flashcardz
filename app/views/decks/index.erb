@@ -4,11 +4,11 @@
     <a class="pull-left"href="decks/<%=deck.id %>"><img class="media-object" src="<%= deck.image_url %>" width="100px"></a>
     <div class="media-body">
       <h4 class="media-heading"><a href="/decks/<%= deck.id %>"><%= deck.name %></a></h4>
-      <% if deck.rounds %>
-        <li>Number correct: <%= deck.rounds[0].num_correct %></li>
-        <li>Number wrong: <%= deck.rounds[0].num_wrong %></li>
-        <li>Number of guesses: <%= deck.rounds[0].guesses.length %></li>
-        <li>Total score: <%= deck.rounds[0].calculate_score %></li>
+       <% unless @current_user.rounds.empty? %>
+        <li>Number correct: <%= @current_user.rounds.last.num_correct %></li>
+        <li>Number wrong: <%= @current_user.rounds.last.num_wrong %></li>
+        <li>Number of guesses: <%= @current_user.rounds.last.guesses.length %></li>
+        <li>Total score: <%= @current_user.rounds.last.calculate_score %></li>
       <% end %>
     </div>
   </div>
