@@ -1,3 +1,5 @@
+require 'pry-rails'
+
 get '/decks' do
   if logged_in?
     @decks = Deck.order('created_at DESC')
@@ -21,8 +23,13 @@ get '/decks/:id' do
     @message = "Deck finished!"
     erb :"decks/show"
   elsif @round
-    @card = @deck.choose_card
-    erb :"decks/show"
+    if request.xhr?
+      @card = @deck.choose_card
+      { card: @card }.to_json
+    else
+      @card = @deck.choose_card
+      erb :"decks/show"
+    end
   else
     redirect back
   end
@@ -31,23 +38,39 @@ end
 
 post '/decks/:id' do
   @deck = Deck.find(params[:id])
-  @card = Card.find(params[:card_id])
+  @card = @deck.cards.find(params[:card_id])
 
-  round = @current_user.rounds.find(params[:id])
+  round = @current_user.rounds.where(deck_id: params[:id]).first
   guess = round.guesses.build(card_id: @card.id)
 
   user_guess = params[:guess]
 
-  if user_guess == @card.answer
-    guess.set_correct
-    round.increase_correct
-    response = "You got it right!"
+  if guess.save
+    if request.xhr?
+      if user_guess == @card.answer
+        guess.set_correct
+        round.increase_correct
+        response = "You got it right!"
+      else
+        round.increase_wrong
+        response = "Oops! The answer was: #{@card.answer}"
+      end
+      { num_correct: round.num_correct,
+        num_wrong: round.num_wrong,
+        response: response,
+        num_left: round.cards_left }.to_json
+    else
+      if user_guess == @card.answer
+        guess.set_correct
+        round.increase_correct
+        @message = "You got it right!"
+      else
+        round.increase_wrong
+        @message = "Oops! The answer was: #{@card.answer}"
+      end
+    end
   else
-    round.increase_wrong
-    response = "Oops! The answer was: #{@card.answer}"
+    flash[:danger] = "There was a problem saving your guess."
+    redirect back
   end
-  { num_correct: round.num_correct,
-    num_wrong: round.num_wrong,
-    response: response,
-    num_left: round.cards_left }.to_json
 end
