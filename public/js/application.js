@@ -9,6 +9,7 @@ $(document).ready(function() {
       $("#num_correct").text(data.num_correct);
       $("#num_wrong").text(data.num_wrong);
       $("#num_remaining").text(data.num_left);
+      $('#cometomama').val('');
       $("#next-button").hide();
     });
 
