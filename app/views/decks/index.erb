@@ -1,4 +1,5 @@
 <h1>Decks</h1>
+  <a href="/upload">Upload a New Deck</a>
   <% @decks.each do |deck| %>
   <div class="media">
     <a class="pull-left"href="decks/<%=deck.id %>"><img class="media-object" src="<%= deck.image_url %>" width="100px"></a>

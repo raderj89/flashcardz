@@ -33,7 +33,6 @@ get '/decks/:id' do
   else
     redirect back
   end
-
 end
 
 post '/decks/:id' do
@@ -73,4 +72,25 @@ post '/decks/:id' do
     flash[:danger] = "There was a problem saving your guess."
     redirect back
   end
+end
+
+get "/upload" do
+  erb :"decks/new"
+end
+
+post "/upload" do
+  File.open('../decks/' + params[:deck][:filename], "w") do |f|
+    f.write(params[:deck][:tempfile].read)
+  end
+
+  deck = Deck.create(name: params[:name])
+
+  cards = File.readlines('../decks/' + params[:deck][:filename])
+
+  cards.each_slice(2) do |pair|
+    card = Card.create(question: pair.first.chomp, answer: pair.last.chomp, deck_id: deck.id)
+  end
+
+  flash[:success] = "The file was successfully uploaded!"
+  redirect "/decks"
 end
