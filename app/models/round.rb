@@ -1,5 +1,5 @@
 class Round < ActiveRecord::Base
-  has_many :guesses
+  has_many :guesses, dependent: :destroy
   belongs_to :user
   belongs_to :deck
 
