@@ -20,9 +20,9 @@ gem 'bcrypt', '~> 3.1.0'
 gem 'sinatra-flash'
 
 
+gem 'rspec'
 group :test do
   gem 'faker'
-  gem 'rspec'
 end
 
 group :development do
