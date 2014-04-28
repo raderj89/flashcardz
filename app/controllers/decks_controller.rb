@@ -1,5 +1,3 @@
-require 'pry-rails'
-
 get '/decks' do
   if logged_in?
     @decks = Deck.order('created_at DESC')
